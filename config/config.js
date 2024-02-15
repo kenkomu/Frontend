@@ -1,3 +1,4 @@
+import 'dotenv/config';
 
 import { Account, Contract, Provider } from "starknet"
 // import { RpcProvider } from "starknet";
@@ -11,13 +12,13 @@ const abi = contract_abi.abi
 export const CONTRACT_ABI = abi
 
 
-export const CONTRACT_ADDRESS = "0x6fb6baf430b2ffa3b2d65b5e40f7c2d2b90586e1618d31da7483a20860238d2"
-export const ACCOUNT_ADDRESS = "0x04B93FC07b2b6Da3520033D8f2BbeF9c42f9873837a4B3DE7a863EDC9e04B058"
+export const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS
+export const ACCOUNT_ADDRESS = process.env.ACCOUNT_ADDRESS
 export const PRIVATE_KEY = ""
 
-const provider = new Provider({ sequencer: { baseUrl:"http://127.0.0.1:5050"} });
-const account = new Account(provider, ACCOUNT_ADDRESS, PRIVATE_KEY)
-const contract = new Contract(abi, CONTRACT_ADDRESS, provider)
-contract.connect(account)
+// const provider = new Provider({ sequencer: { baseUrl:"http://127.0.0.1:5050"} });
+// const account = new Account(provider, ACCOUNT_ADDRESS, PRIVATE_KEY)
+// const contract = new Contract(abi, CONTRACT_ADDRESS, provider)
+// contract.connect(account)
 
-export { contract, account, provider }
+// export { contract, account, provider }

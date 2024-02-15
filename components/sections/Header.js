@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { 
+import {
   Box,
   Flex,
   Text,
   Button,
-  
+
 
 
 } from "@chakra-ui/react";
@@ -75,9 +75,9 @@ const Header = ({ isSignedIn, wallet, ...props }) => {
       signOut();
     } else {
       signIn();
-  };
+    };
 
-}
+  }
 
   return (
     <Flex
@@ -115,39 +115,35 @@ const Header = ({ isSignedIn, wallet, ...props }) => {
           pt={[4, 4, 0, 0]}
         >
           <MenuItem to="/">Home</MenuItem>
-          
+
           <MenuItem to="/properties">Properties </MenuItem>
 
           <MenuItem to="/Buyer"> Buyer </MenuItem>
-          
 
-               {/* Conditional rendering of the Profile MenuItem */}
+
+          {/* Conditional rendering of the Profile MenuItem */}
 
           {isSignedIn && (
-             <MenuItem to="/seller">Seller</MenuItem>
-            )}
+            <MenuItem to="/seller">Seller</MenuItem>
+          )}
 
           <MenuItem to="/aboutus"> Abou Us</MenuItem>
 
           <MenuItem to="/contacts"> Contact </MenuItem>
-          {
-              connection ?
-                    <Button radius={"xl"}   onClick={address ? handleButtonClick : handleConnetWalletBtnClick}
-                    >LOGOUT</Button>
-                    :
-                    <Button radius={"xl"} color='green'   onClick={address ? handleButtonClick : handleConnetWalletBtnClick}
-                    >LOGIN</Button>
-                        
-                               }
+          
+          <Button radius={"xl"} color='green' onClick={handleConnetWalletBtnClick}
+          >
+            {address ? "LOGOUT" : "LOGIN"}
+          </Button>
 
           {isSignedIn && (
-              <MenuItem to="/profile">Profile</MenuItem>
-            )}
+            <MenuItem to="/profile">Profile</MenuItem>
+          )}
 
-          
+
           <MenuItem isLast>
- 
-                          {/* {
+
+            {/* {
                 connectors.map((connector) => (
                     <Wallet
                     src={connector.icon.light!}
@@ -158,32 +154,32 @@ const Header = ({ isSignedIn, wallet, ...props }) => {
                 ))
               }       */}
             {isSignedIn ? (
-            <Button
-            size="sm"
-            rounded="md"
-            color={["primary.500", "primary.500", "white", "white"]}
-            bg={["white", "white", "primary.500", "primary.500"]}
-            _hover={{
-              bg: ["primary.100", "primary.100", "primary.600", "primary.600"]
-            }}
-            onClick={signOut} 
-          >
-            Log out
-          </Button>
-        ) : (
-            <Button
-            size="sm"
-            rounded="md"
-            color={["primary.500", "primary.500", "white", "white"]}
-            bg={["white", "white", "primary.500", "primary.500"]}
-            _hover={{
-              bg: ["primary.100", "primary.100", "primary.600", "primary.600"]
-            }}
-            onClick={signIn}
-          >
-            Log in using Near
-          </Button>
-        )}
+              <Button
+                size="sm"
+                rounded="md"
+                color={["primary.500", "primary.500", "white", "white"]}
+                bg={["white", "white", "primary.500", "primary.500"]}
+                _hover={{
+                  bg: ["primary.100", "primary.100", "primary.600", "primary.600"]
+                }}
+                onClick={signOut}
+              >
+                Log out
+              </Button>
+            ) : (
+              <Button
+                size="sm"
+                rounded="md"
+                color={["primary.500", "primary.500", "white", "white"]}
+                bg={["white", "white", "primary.500", "primary.500"]}
+                _hover={{
+                  bg: ["primary.100", "primary.100", "primary.600", "primary.600"]
+                }}
+                onClick={signIn}
+              >
+                Log in using Near
+              </Button>
+            )}
           </MenuItem>
         </Flex>
       </Box>

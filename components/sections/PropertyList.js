@@ -94,9 +94,11 @@ function PropertyList({ isSignedIn, wallet, contractId }) {
   const { isOpen: listingModalOpen, onOpen: openListingModal, onClose: closeListingModal } = useDisclosure();
   const { isOpen: transferModalOpen, onOpen: openTransferModal, onClose: closeTransferModal } = useDisclosure();
   const [currentModal, setCurrentModal] = React.useState(null);
-
+  const { contract, account, address, connection } = useAppContext();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
+  
 
   const openModal = (modal) => {
     setCurrentModal(modal);
@@ -203,16 +205,7 @@ function PropertyList({ isSignedIn, wallet, contractId }) {
   const handleSubmit = async () => {
     // Call the NEAR Protocol function to post the job
     // await postJobToSmartContract(formData);
-    let send_p = parseFloat(formData.project_budget);
 
-    let st = send_p.toString();
-
-    console.log(st)
-
-    const deposit = utils.format.parseNearAmount(st);
-
-
-    console.log("form data is", formData);
 
     const is_available = true
     const title = formData.title;
@@ -232,41 +225,45 @@ function PropertyList({ isSignedIn, wallet, contractId }) {
     const long = parseFloat(formData.long);
 
     console.log("lat", lat);
+contract.add_property({
+  lat,
+}).then((response) => {}).catch((error) => {console.log(error)})
+
 
 
 
     // const jsonData = JSON.stringify(updatedFormData);
 
-    wallet
-      .callMethod({
-        method: "add_property",
-        args: {
-          is_available: is_available,
-          title: title,
-          description: description,
-          status: status,
-          price: price,
-          area: area,
-          name: name,
-          username: username,
-          email: email,
-          phone: phone,
-          address: address,
-          city: city,
-          state: state,
-          county: county,
-          lat: lat,
-          long: long,
-        },
-        contractId: contractId
-      })
-      .then(async () => {
-        return getProperties();
-      })
-      .then(setProperties)
-      .finally(() => {
-        setUiPleaseWait(false);
-      });
+    // wallet
+    //   .callMethod({
+    //     method: "add_property",
+    //     args: {
+    //       is_available: is_available,
+    //       title: title,
+    //       description: description,
+    //       status: status,
+    //       price: price,
+    //       area: area,
+    //       name: name,
+    //       username: username,
+    //       email: email,
+    //       phone: phone,
+    //       address: address,
+    //       city: city,
+    //       state: state,
+    //       county: county,
+    //       lat: lat,
+    //       long: long,
+    //     },
+    //     contractId: contractId
+    //   })
+    //   .then(async () => {
+    //     return getProperties();
+    //   })
+    //   .then(setProperties)
+    //   .finally(() => {
+    //     setUiPleaseWait(false);
+    //   });
 
 
 

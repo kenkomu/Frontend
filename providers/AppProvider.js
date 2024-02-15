@@ -66,12 +66,19 @@ const AppProvider = ({ children }) => {
     });
 
 
-    // const makeContractConnection = () => {
-    //     if (account) {
-    //         const contract = new Contract(CONTRACT_ABI, CONTRACT_ADDRESS, account)
-    //         setContract(contract)
-    //     }
-    // }
+    const makeContractConnection = () => {
+        let contract = null
+        if (account) {
+            contract = new Contract(CONTRACT_ABI, CONTRACT_ADDRESS, account)
+            
+        }
+        else {
+            contract = new Contract(CONTRACT_ABI, CONTRACT_ADDRESS)
+        }
+        setContract(contract)
+    
+    }
+ 
 
     const handleConnetWalletBtnClick = () => {
         console.log("clicked connect wallet")
@@ -118,9 +125,9 @@ console.log(err);
         connectToStarknet();
     }, []);
 
-    // useEffect(() => {
-    //     makeContractConnection()
-    // }, [account, address])
+    useEffect(() => {
+        makeContractConnection()
+    }, [account, address])
 
     return (
         <AppContext.Provider value={contextValue}>
